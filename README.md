@@ -1,1 +1,1 @@
-# albert-jira-extension
+# Simple Jira Plugin
