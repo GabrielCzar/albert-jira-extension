@@ -6,7 +6,7 @@ from pathlib import Path
 
 import albertv0 as v0
 
-# initial configuration -----------------------------------------------------------------------
+# initial configuration 
 
 __iid__ = "PythonInterface/v0.2"
 __simplename__ = "sjira"
@@ -27,8 +27,6 @@ server_path = config_path / "server"
 
 
 def initialize():
-    # Called when the extension is loaded (ticked in the settings) - blocking
-
     for p in (cache_path, config_path, data_path):
         p.mkdir(parents=False, exist_ok=True)
 
@@ -105,6 +103,20 @@ def setup(query):
             )
     except Exception:
         os.remove(config_path / "server")
+        results.insert(
+                0,
+                v0.Item(
+                    id=__prettyname__,
+                    icon=icon_path,
+                    text="Something went wrong! Please try again!",
+                    actions=[
+                        v0.ClipAction(
+                            f"Copy error - report something",
+                            f"{traceback.format_exc()}",
+                        )
+                    ],
+                ),
+            )
     return results
 
 def save_data(data: str, data_name: str):
