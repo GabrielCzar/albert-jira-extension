@@ -9,7 +9,7 @@ import albertv0 as v0
 # initial configuration 
 
 __iid__ = "PythonInterface/v0.2"
-__simplename__ = "sjira"
+__simplename__ = "jira"
 __version__ = "0.1"
 __trigger__ = "jira "
 __author__ = "Gabriel Cesar"
@@ -45,17 +45,29 @@ def handleQuery(query):
             if results_setup:
                 return results_setup
 
-            issue = query.string
+            query_string = query.string
 
-            results.append(
-                v0.Item(
-                    id=__prettyname__,
-                    icon=icon_path,
-                    text="Open issue...",
-                    actions=[v0.UrlAction(
-                        f"Open issue in Jira", get_issue_path(issue))],
+            if "remove server" in query_string:
+                results.append(
+                    v0.Item(
+                        id=__prettyname__,
+                        icon=icon_path,
+                        text="Remove server",
+                        actions=[
+                            v0.FuncAction(f"Removing stored server", remove_server())
+                        ]
+                    )
                 )
-            )
+            else:
+                results.append(
+                    v0.Item(
+                        id=__prettyname__,
+                        icon=icon_path,
+                        text="Open issue...",
+                        actions=[v0.UrlAction(
+                            f"Open issue in Jira", get_issue_path(query_string))],
+                    )
+                )
 
         except Exception:
             results.insert(
@@ -102,7 +114,7 @@ def setup(query):
                 )
             )
     except Exception:
-        os.remove(config_path / "server")
+        remove_server()
         results.insert(
                 0,
                 v0.Item(
@@ -130,3 +142,6 @@ def load_data(data_name) -> str:
         data = f.readline().strip().split()[0]
 
     return data
+
+def remove_server():
+    os.remove(config_path / "server")
