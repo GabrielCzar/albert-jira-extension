@@ -3,6 +3,7 @@
 import os
 import traceback
 from pathlib import Path
+import re
 
 import albertv0 as v0
 
@@ -68,6 +69,15 @@ def handleQuery(query):
                             f"Open issue in Jira", get_issue_path(query_string))],
                     )
                 )
+                results.append(
+                    v0.Item(
+                        id=__prettyname__,
+                        icon=icon_path,
+                        text="Search for issue...",
+                        actions=[v0.UrlAction(
+                            f"Search for issue in Jira", get_search_path(query_string))],
+                    )
+                )
 
         except Exception:
             results.insert(
@@ -87,12 +97,20 @@ def handleQuery(query):
 
     return results
 
-
-def get_issue_path(issue):
+def get_server_path():
     server = load_data("server")
     if not "https://" in server:
         server = "https://" + server
+    return server
+
+
+def get_issue_path(issue):
+    server = get_server_path()
     return server + "/browse/" + issue    
+
+def get_search_path(text):
+    server = get_server_path()
+    return server + "/issues/?jql=text%20~%20\"" + text + "\""
 
 def setup(query):
     results = []
