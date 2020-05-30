@@ -91,9 +91,11 @@ def handleQuery(query):
                     text="Something went wrong! Press [ENTER] to copy error and report it",
                     actions=[
                         v0.ClipAction(
-                            f"Copy error - report something",
+                            f"Copied error - report this problem",
                             f"{traceback.format_exc()}",
-                        )
+                        ),
+                        v0.UrlAction(
+                            f"Report error!", "https://github.com/gabrielczar/albert-jira-extension/issues/new")
                     ],
                 ),
             )
@@ -148,9 +150,11 @@ def setup(query):
                 text="Something went wrong! Please try again!",
                 actions=[
                     v0.ClipAction(
-                        f"Copy error - report something",
+                        f"Copy error - report this problem",
                         f"{traceback.format_exc()}",
-                    )
+                    ),
+                    v0.UrlAction(
+                        f"Report error!", "https://github.com/gabrielczar/albert-jira-extension/issues/new")
                 ],
             ),
         )
