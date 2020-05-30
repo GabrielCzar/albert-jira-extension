@@ -1,4 +1,4 @@
-# Simple Jira Plugin
+# Simple Jira extension
 
 ![jira](jira.png)
 
