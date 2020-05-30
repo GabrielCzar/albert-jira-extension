@@ -15,8 +15,8 @@ __version__ = "0.1"
 __trigger__ = "jira "
 __author__ = "Gabriel Cesar"
 __dependencies__ = []
-__prettyname__ = "Simple Jira Plugin"
-__homepage__ = "https://github.com/gabrielczar/albert-jira-plugin"
+__prettyname__ = "Simple Jira extension"
+__homepage__ = "https://github.com/gabrielczar/albert-jira-extension"
 
 icon_path = os.path.join(os.path.dirname(
     __file__), "static", "images", "jira_blue")
