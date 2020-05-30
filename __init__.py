@@ -18,8 +18,8 @@ __dependencies__ = []
 __prettyname__ = "Simple Jira extension"
 __homepage__ = "https://github.com/gabrielczar/albert-jira-extension"
 
-icon_path = os.path.join(os.path.dirname(
-    __file__), "static", "images", "jira_blue")
+file_dirname = os.path.dirname(__file__)
+icon_path = os.path.join(file_dirname, "static", "images", "jira_blue")
 
 cache_path = Path(v0.cacheLocation()) / __simplename__
 config_path = Path(v0.configLocation()) / __simplename__
