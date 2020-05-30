@@ -2,6 +2,10 @@
 
 ![jira](readme-resources/jira.png)
 
+### Installation
+
+`sh -c "$(wget -O- https://raw.githubusercontent.com/gabrielczar/albert-jira-extension/master/install.sh)"`
+
 ### Configuration
 
 In the first time that you type 'jira' will be necessary configure a Jira Server.
