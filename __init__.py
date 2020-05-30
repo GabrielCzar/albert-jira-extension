@@ -56,6 +56,7 @@ def handleQuery(query):
                         id=__prettyname__,
                         icon=icon_path,
                         text="Remove server",
+                        subtext="press [ENTER]",
                         actions=[
                             v0.FuncAction(
                                 f"Removing stored server", remove_server())
