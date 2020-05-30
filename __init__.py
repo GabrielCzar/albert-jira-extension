@@ -7,7 +7,7 @@ import re
 
 import albertv0 as v0
 
-# initial configuration 
+# initial configuration
 
 __iid__ = "PythonInterface/v0.2"
 __simplename__ = "jira"
@@ -55,7 +55,8 @@ def handleQuery(query):
                         icon=icon_path,
                         text="Remove server",
                         actions=[
-                            v0.FuncAction(f"Removing stored server", remove_server())
+                            v0.FuncAction(
+                                f"Removing stored server", remove_server())
                         ]
                     )
                 )
@@ -97,6 +98,7 @@ def handleQuery(query):
 
     return results
 
+
 def get_server_path():
     server = load_data("server")
     if not "https://" in server:
@@ -104,18 +106,24 @@ def get_server_path():
     return server
 
 
-def get_issue_path(issue):
+issue_regex = re.compile(r"\w+\/", re.IGNORECASE)
+
+
+def get_issue_path(raw_issue):
     server = get_server_path()
-    return server + "/browse/" + issue    
+    issue = issue_regex.sub("", raw_issue)
+    return server + "/browse/" + issue
+
 
 def get_search_path(text):
     server = get_server_path()
     return server + "/issues/?jql=text%20~%20\"" + text + "\""
 
+
 def setup(query):
     results = []
 
-    try: 
+    try:
         if not server_path.is_file():
             results.append(
                 v0.Item(
@@ -134,25 +142,27 @@ def setup(query):
     except Exception:
         remove_server()
         results.insert(
-                0,
-                v0.Item(
-                    id=__prettyname__,
-                    icon=icon_path,
-                    text="Something went wrong! Please try again!",
-                    actions=[
-                        v0.ClipAction(
-                            f"Copy error - report something",
-                            f"{traceback.format_exc()}",
-                        )
-                    ],
-                ),
-            )
+            0,
+            v0.Item(
+                id=__prettyname__,
+                icon=icon_path,
+                text="Something went wrong! Please try again!",
+                actions=[
+                    v0.ClipAction(
+                        f"Copy error - report something",
+                        f"{traceback.format_exc()}",
+                    )
+                ],
+            ),
+        )
     return results
+
 
 def save_data(data: str, data_name: str):
     """Save a piece of data in the configuration directory."""
     with open(config_path / data_name, "w") as f:
         f.write(data)
+
 
 def load_data(data_name) -> str:
     """Load a piece of data from the configuration directory."""
@@ -160,6 +170,7 @@ def load_data(data_name) -> str:
         data = f.readline().strip().split()[0]
 
     return data
+
 
 def remove_server():
     os.remove(config_path / "server")
