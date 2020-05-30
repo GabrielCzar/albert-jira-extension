@@ -26,6 +26,7 @@ config_path = Path(v0.configLocation()) / __simplename__
 data_path = Path(v0.dataLocation()) / __simplename__
 
 server_path = config_path / "server"
+issue_regex = re.compile(r"\w+\/", re.IGNORECASE)
 
 
 def initialize():
@@ -105,9 +106,6 @@ def get_server_path():
     if not "https://" in server:
         server = "https://" + server
     return server
-
-
-issue_regex = re.compile(r"\w+\/", re.IGNORECASE)
 
 
 def get_issue_path(raw_issue):
