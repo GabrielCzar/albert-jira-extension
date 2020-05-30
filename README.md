@@ -1,6 +1,6 @@
 # Simple Jira extension
 
-![jira](static/images/jira.png)
+![jira](readme-resources/jira.png)
 
 ### Configuration
 
@@ -10,7 +10,7 @@ Just write the host of your jira server like `https://jira.server.com`.
 
 This is a message that you see:
 
-![alert message when the server configuration is missing](static/images/config-jira.png)
+![alert message when the server configuration is missing](readme-resources/config-jira.png)
 
 ### Commands
 
@@ -18,10 +18,10 @@ This is a message that you see:
 
 Just type the word 'jira' following the issue ticket to open the Jira in your browser.
 
-![image of the result after type 'jira'](static/images/project-jira.png)
+![image of the result after type 'jira'](readme-resources/project-jira.png)
 
 - Remove jira server configuration
 
 Just type `jira remove server`, then the action will start automatically.
 
-![alert message when is trying to remove server configuration](static/images/remove-jira-server.png)
+![alert message when is trying to remove server configuration](readme-resources/remove-jira-server.png)
