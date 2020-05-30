@@ -1,4 +1,4 @@
-"""Simple Jira Issue Tracking."""
+"""Simple Jira extension."""
 
 import os
 import traceback
@@ -18,7 +18,8 @@ __dependencies__ = []
 __prettyname__ = "Simple Jira Plugin"
 __homepage__ = "https://github.com/gabrielczar/albert-jira-plugin"
 
-icon_path = os.path.join(os.path.dirname(__file__), "jira_blue")
+icon_path = os.path.join(os.path.dirname(
+    __file__), "static", "images", "jira_blue")
 
 cache_path = Path(v0.cacheLocation()) / __simplename__
 config_path = Path(v0.configLocation()) / __simplename__
